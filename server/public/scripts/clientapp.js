@@ -36,7 +36,7 @@ $(document).ready(function () {
   function getTreats() {
     $.ajax({
       method: 'GET',
-      url: '/treats',
+      url: '/treats'
     })
     .done(function (treatArray) {
       console.log('GET /treats returned ', treatArray);

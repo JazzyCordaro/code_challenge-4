@@ -9,7 +9,7 @@ var port = process.env.PORT || 5000;
 
 app.listen( '5000', 'localhost', function(){
   console.log( 'server up on ' + port );
-}); //end server up
+});
 
 app.get( '/', function( req, res ){
   console.log( 'base url hit' );
@@ -19,10 +19,7 @@ app.get( '/', function( req, res ){
 
 
 
-
-
-
-app.get( '/treats', function( req, res ){
+app.get( '/', function( req, res ){
   console.log( 'in getTreats' );
   pg.connect( connectionString, function( err, client, done ){
     if( err ){
@@ -42,6 +39,31 @@ app.get( '/treats', function( req, res ){
     }
   });
 });
+
+
+
+
+
+
+
+
+
+app.post( '/treats', urlencodedParser, function( req, res ){
+  console.log( 'in treats:', req.body );
+  pg.connect( connectionString, function( err, client, done ){
+    if( err ){
+      console.log( err );
+    }
+    else{
+      console.log( 'connected to db' );
+      client.query( 'INSERT INTO treat ( id, name, description ) VALUES ( $1, $2, $3 )', [ req.body.id, req.body.name, req.body.description ] );
+    }
+  });
+  res.send( true );
+});
+
+
+
 
 
 
