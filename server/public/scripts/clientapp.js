@@ -1,3 +1,5 @@
+console.log('clientapp.js is sourced');
+
 $(document).ready(function () {
 
   // get treats on load
